@@ -4,10 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-// ============================================================
 // STRUKTUR DATA
-// ============================================================
-
 struct Vec3
 {
     public double X, Y, Z;
@@ -71,10 +68,7 @@ class Stats
     public int MaxDepth;
 }
 
-// ============================================================
 // GEOMETRI - HELPER
-// ============================================================
-
 static class Geometry
 {
     public static Vec3 Cross(Vec3 a, Vec3 b) => new Vec3(
@@ -85,7 +79,7 @@ static class Geometry
 
     public static double Dot(Vec3 a, Vec3 b) => a.X*b.X + a.Y*b.Y + a.Z*b.Z;
 
-    // Separating Axis Theorem: cek apakah segitiga berpotongan dengan AABB
+    // cek apakah segitiga berpotongan dengan AABB
     public static bool TriangleIntersectsAABB(Triangle tri, AABB box)
     {
         Vec3 c  = box.Center();
@@ -133,10 +127,7 @@ static class Geometry
     }
 }
 
-// ============================================================
 // PARSER .OBJ
-// ============================================================
-
 static class ObjParser
 {
     public static Mesh Parse(string path)
@@ -216,10 +207,7 @@ static class ObjParser
     }
 }
 
-// ============================================================
 // OCTREE - DIVIDE AND CONQUER
-// ============================================================
-
 static class OctreeBuilder
 {
     public static AABB ComputeBounds(Mesh mesh)
@@ -251,7 +239,7 @@ static class OctreeBuilder
         if (!stats.PrunedByDepth.ContainsKey(depth)) stats.PrunedByDepth[depth] = 0;
         stats.NodesByDepth[depth]++;
 
-        // Tidak ada segitiga: pangkas
+        // Tidak ada segitiga -> pruning
         if (triangles.Count == 0)
         {
             stats.PrunedByDepth[depth]++;
@@ -268,13 +256,13 @@ static class OctreeBuilder
             return node;
         }
 
-        // Divide: bagi menjadi 8 oktan
+        // bagi menjadi 8 oktan
         AABB[] subBoxes = bounds.Subdivide();
         bool anyChild = false;
 
         for (int i = 0; i < 8; i++)
         {
-            // Conquer: filter segitiga yang berpotongan dengan oktan ini
+            // filter segitiga yang berpotongan dengan oktan ini
             var childTris = new List<Triangle>();
             foreach (var tri in triangles)
                 if (Geometry.TriangleIntersectsAABB(tri, subBoxes[i]))
@@ -307,10 +295,7 @@ static class OctreeBuilder
     }
 }
 
-// ============================================================
 // GENERATOR OUTPUT .OBJ
-// ============================================================
-
 static class VoxelExporter
 {
     static readonly double[,] CubeVerts = {
@@ -363,10 +348,7 @@ static class VoxelExporter
     }
 }
 
-// ============================================================
 // PROGRAM UTAMA
-// ============================================================
-
 class Program
 {
     static void Main(string[] args)
