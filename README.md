@@ -82,17 +82,16 @@ dotnet bin/Voxelizer.dll model.obj 5
 ## Struktur Repository
 
 ```
-Tucil2_NIM1_NIM2/
-├── src/              # Source code C#
+Tucil2_18223123_18223121/
+├── doc/
+│   └── Laporan_Tucil2_18223123_18223121.pdf
+├── src/
 │   ├── Program.cs
 │   └── Voxelizer.csproj
-├── bin/              # Binary hasil kompilasi
-│   ├── Voxelizer.dll
-│   └── Voxelizer.runtimeconfig.json
-├── test/             # File .obj pengujian dan hasilnya
+├── test/
 │   ├── cube.obj
-│   └── cube-voxelized.obj
-├── doc/              # Laporan PDF
+│   ├── cube-voxelized.obj
+│   └── ...
 └── README.md
 ```
 
@@ -102,5 +101,5 @@ Tucil2_NIM1_NIM2/
 
 | Nama | NIM |
 |---|---|
-| [Nama Mahasiswa 1] | [NIM 1] |
-| [Nama Mahasiswa 2] | [NIM 2] |
+| Harfhan Ikhtiar Ahmad Rizky | 18223123 |
+| Fudhail Fayyadh | 18223121 |
